@@ -1,0 +1,50 @@
+class Book:
+    def __init__(self, name, author, isbn):
+        self.name = name
+        self.author = author
+        self.isbn = isbn
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, name, author, isbn):
+        book = Book(name, author, isbn)
+        self.books.append(book)
+        print(f"Book '{name}' added to the library.")
+
+    def search_by_name(self, name):
+        results = [book for book in self.books if name.lower() in book.name.lower()]
+        return results
+
+    def search_by_author(self, author):
+        results = [book for book in self.books if author.lower() in book.author.lower()]
+        return results
+
+    def search_by_isbn(self, isbn):
+        results = [book for book in self.books if isbn == book.isbn]
+        return results
+
+    def display_books(self, books):
+        if not books:
+            print("No books found.")
+        for book in books:
+            print(f"Name: {book.name}, Author: {book.author}, ISBN: {book.isbn}")
+
+
+library = Library()
+library.add_book("The Great Gatsby", "F. Scott Fitzgerald", "9780743273565")
+library.add_book("To Kill a Mockingbird", "Harper Lee", "9780060935467")
+library.add_book("1984", "George Orwell", "9780451524935")
+
+# Search by book name
+books_by_name = library.search_by_name("1984")
+library.display_books(books_by_name)
+
+# Search by author name
+books_by_author = library.search_by_author("Harper Lee")
+library.display_books(books_by_author)
+
+# Search by ISBN number
+books_by_isbn = library.search_by_isbn("9780743273565")
+library.display_books(books_by_isbn)
